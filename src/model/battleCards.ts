@@ -94,3 +94,5 @@ export const battleCards: BattleCard[] = [{
     "Event"
   ]
 }];
+
+export const standBattleCards = battleCards.filter(card => card.types.includes('Stand'));

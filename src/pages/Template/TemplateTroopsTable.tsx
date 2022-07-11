@@ -4,7 +4,7 @@ import {RootState} from "redux/rootReducer";
 import {Button, FormControl, Table} from "react-bootstrap";
 import {chCb} from "utils/inputUtils";
 import {addTroop, changeField} from "redux/armyTemplate";
-import {ArmyTemplateTroop} from "model/army";
+import {ArmyTemplateTroop, getCost} from "model/army";
 import Select from "react-select";
 import {
   closeOrderFootTypes,
@@ -12,6 +12,7 @@ import {
   openOrderFootTypes,
   openOrderMountedTypes,
 } from "model/troops";
+import {standBattleCards} from "model/battleCards";
 
 interface TemplateTroopsTableProps {
 
@@ -39,43 +40,55 @@ const TemplateTroopsTable: React.FC<TemplateTroopsTableProps> = () => {
 
   return (
     <div>
-      <Button onClick={() => dispatch(addTroop())}>Add Row</Button>
       <Table>
         <thead>
         <tr>
           <th>Name</th>
           <th>Description</th>
           <th>Troop Type</th>
+          <th>Battle Cards</th>
           <th>Cost</th>
           <th>Min</th>
           <th>Max</th>
         </tr>
         </thead>
         <tbody>
-        {troops.map((troop, i) =>
-          <tr key={i}>
-            <td>
-              <FormControl value={troop.name} onChange={change(i, 'name')}/>
-            </td>
-            <td>
-              <FormControl value={troop.description} onChange={change(i, 'description')}/>
-            </td>
-            <td>
-              <Select
-                options={troopTypesOptions}
-                getOptionLabel={troopType => troopType.name}
-                getOptionValue={troopType => troopType.name}
-                value={troop.troopType}
-                onChange={(value) => dispatch(changeField({i, field: 'troopType', value}))}
-              />
-            </td>
-            <td>
-              {troop.troopType.cost}
-            </td>
-          </tr>
-        )}
+          {troops.map((troop, i) =>
+            <tr key={i}>
+              <td>
+                <FormControl value={troop.name} onChange={change(i, 'name')}/>
+              </td>
+              <td>
+                <FormControl value={troop.description} onChange={change(i, 'description')}/>
+              </td>
+              <td>
+                <Select
+                  options={troopTypesOptions}
+                  getOptionLabel={troopType => troopType.name}
+                  getOptionValue={troopType => troopType.name}
+                  value={troop.troopType}
+                  onChange={(value) => dispatch(changeField({i, field: 'troopType', value}))}
+                />
+              </td>
+              <td>
+                <Select
+                  isMulti
+                  options={standBattleCards}
+                  getOptionLabel={card => card.name}
+                  getOptionValue={card => card.name}
+                  value={troop.cards}
+                  onChange={(value) => dispatch(changeField({i, field: 'cards', value}))}
+                />
+              </td>
+              <td>
+                {troop.troopType.cost + getCost(troop)}
+              </td>
+            </tr>
+          )}
         </tbody>
       </Table>
+
+      <Button onClick={() => dispatch(addTroop())}>Add Row</Button>
     </div>
   );
 };
