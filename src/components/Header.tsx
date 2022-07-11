@@ -13,7 +13,7 @@ const Header: React.FC<HeaderProps> = () => (
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="mr-auto" activeKey={usePath() ?? ''}>
         <Nav.Link as={Link} href="/">Army Template</Nav.Link>
-        <Nav.Link as={Link} href="/list">Armi List</Nav.Link>
+        <Nav.Link as={Link} href="/list">Army List</Nav.Link>
         <Nav.Link as={Link} href="/game">Game Mode</Nav.Link>
       </Nav>
     </Navbar.Collapse>
