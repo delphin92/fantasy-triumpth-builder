@@ -64,6 +64,7 @@ const TemplateTroopsTable: React.FC<TemplateTroopsTableProps> = () => {
               <Select
                 options={troopTypesOptions}
                 getOptionLabel={troopType => troopType.name}
+                getOptionValue={troopType => troopType.name}
                 value={troop.troopType}
                 onChange={(value) => dispatch(changeField({i, field: 'troopType', value}))}
               />
