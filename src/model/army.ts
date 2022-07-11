@@ -11,10 +11,13 @@ export interface ArmyTemplateTroop {
 }
 
 export const getCost = (troop: ArmyTemplateTroop) =>
-  troop.cards
-    .map(card =>
-      typeof card.cost === 'number'
-        ? card.cost
-        : card.cost.special[troop.troopType.name] ?? card.cost.default
-    )
-    .reduce((all, cur) => all + cur, 0);
+  Math.max(
+    troop.troopType.cost + troop.cards
+      .map(card =>
+        typeof card.cost === 'number'
+          ? card.cost
+          : card.cost.special[troop.troopType.name] ?? card.cost.default
+      )
+      .reduce((all, cur) => all + cur, 0),
+    1
+  );

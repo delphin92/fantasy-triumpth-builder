@@ -1,11 +1,12 @@
 import React from "react";
+import ArmyListTroopsTable from "pages/ArmyList/ArmyListTroopsTable";
 
 interface ArmyListProps {
 
 }
 
 const ArmyList: React.FC<ArmyListProps> = () => (
-  <div>Hello ArmyList</div>
+  <ArmyListTroopsTable/>
 );
 
 export default ArmyList;

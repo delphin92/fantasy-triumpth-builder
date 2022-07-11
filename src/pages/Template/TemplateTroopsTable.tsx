@@ -81,7 +81,7 @@ const TemplateTroopsTable: React.FC<TemplateTroopsTableProps> = () => {
                 />
               </td>
               <td>
-                {troop.troopType.cost + getCost(troop)}
+                {getCost(troop)}
               </td>
             </tr>
           )}
