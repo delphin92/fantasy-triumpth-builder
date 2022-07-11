@@ -1,11 +1,12 @@
 import React from "react";
+import GameTroopsTable from "pages/GameMode/GameTroopsTable";
 
 interface GameModeProps {
 
 }
 
 const GameMode: React.FC<GameModeProps> = () => (
-  <div>Hello GameMode</div>
+  <GameTroopsTable/>
 );
 
 export default GameMode;
