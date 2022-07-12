@@ -41,7 +41,7 @@ export const battleCards: BattleCard[] = [{
   name: "Armored",
   cost: 0.5,
   reference: 25,
-  rule: '',
+  rule: '-1 for enemy Missile Attacks',
   types: [
     "Stand",
     "Transfer"
@@ -58,7 +58,7 @@ export const battleCards: BattleCard[] = [{
   name: "Away",
   cost: 0.5,
   reference: 27,
-  rule: '',
+  rule: 'Can move to and from Away',
   types: [
     "Hero",
     "Stand"

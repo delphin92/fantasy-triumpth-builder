@@ -6,12 +6,13 @@ export interface TroopType {
   vsFoot: number;
   vsMounted: number;
   shoot?: number;
+  shootDistance?: number;
   target: number
   move: number;
-  shatter?: TroopType[];
-  shattered?: TroopType[];
-  evade?: TroopType[];
-  panic?: TroopType[];
+  shatter?: string;
+  shattered?: string | string[];
+  evade?: string;
+  panic?: string;
   additional?: string[];
 }
 
@@ -60,16 +61,19 @@ export const openOrderFootTypes: TroopType[] = convert('foot', 'open')([{
   vsFoot: 2,
   vsMounted: 4,
   shoot: 3,
+  shootDistance: 3,
   target: 3,
   move: 3,
-  cost: 4
+  cost: 4,
+  shattered: 'Any mounted'
 }, {
   name: "Bow Levy",
   vsFoot: 2,
   vsMounted: 3,
   target: 3,
   move: 3,
-  cost: 2
+  cost: 2,
+  shattered: 'Any mounted'
 }, {
   name: "Light Foot",
   vsFoot: 3,
@@ -119,6 +123,7 @@ export const closeOrderFootTypes: TroopType[] = convert('foot', 'open')([{
   vsFoot: 2,
   vsMounted: 2,
   shoot: 4,
+  shootDistance: 8,
   target: 3,
   move: 2,
   cost: 3
@@ -148,6 +153,7 @@ export const closeOrderFootTypes: TroopType[] = convert('foot', 'open')([{
   vsFoot: 3,
   vsMounted: 4,
   shoot: 3,
+  shootDistance: 3,
   target: 3,
   move: 3,
   cost: 4
@@ -170,6 +176,7 @@ export const closeOrderFootTypes: TroopType[] = convert('foot', 'open')([{
   vsFoot: 3,
   vsMounted: 4,
   shoot: 3,
+  shootDistance: 3,
   target: 4,
   move: 2,
   cost: 3
@@ -239,7 +246,8 @@ export const closeOrderMountedTypes: TroopType[] = convert('foot', 'open')([{
   vsMounted: 4,
   target: 3,
   move: 4,
-  cost: 4
+  cost: 4,
+  shattered: ['Elephants, Javelin Cavalry, Raiders', 'On Difficult Terrain']
 }, {
   name: "Elephants",
   vsFoot: 5,
