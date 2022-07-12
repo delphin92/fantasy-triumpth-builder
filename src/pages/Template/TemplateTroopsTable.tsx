@@ -3,8 +3,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "redux/rootReducer";
 import {Button, FormControl, Table} from "react-bootstrap";
 import {chCb} from "utils/inputUtils";
-import {addTroop, changeField} from "redux/armyTemplate";
-import {ArmyTemplateTroop, getCost} from "model/army";
+import {addTroop, changeTroopField} from "redux/armyTemplate";
+import {ArmyTemplateTroop, getTroopCost} from "model/army";
 import Select from "react-select";
 import {
   closeOrderFootTypes,
@@ -36,7 +36,7 @@ const TemplateTroopsTable: React.FC<TemplateTroopsTableProps> = () => {
   const { troops } = useSelector((state: RootState) => state.armyTemplate);
   const dispatch = useDispatch();
   const change = (i: number, field: keyof ArmyTemplateTroop) =>
-    chCb(value => dispatch(changeField({i, field, value})))
+    chCb(value => dispatch(changeTroopField({i, field, value})))
 
   return (
     <div>
@@ -67,7 +67,7 @@ const TemplateTroopsTable: React.FC<TemplateTroopsTableProps> = () => {
                   getOptionLabel={troopType => troopType.name}
                   getOptionValue={troopType => troopType.name}
                   value={troop.troopType}
-                  onChange={(value) => dispatch(changeField({i, field: 'troopType', value}))}
+                  onChange={(value) => dispatch(changeTroopField({i, field: 'troopType', value}))}
                 />
               </td>
               <td>
@@ -77,11 +77,11 @@ const TemplateTroopsTable: React.FC<TemplateTroopsTableProps> = () => {
                   getOptionLabel={card => card.name}
                   getOptionValue={card => card.name}
                   value={troop.cards}
-                  onChange={(value) => dispatch(changeField({i, field: 'cards', value}))}
+                  onChange={(value) => dispatch(changeTroopField({i, field: 'cards', value}))}
                 />
               </td>
               <td>
-                {getCost(troop)}
+                {getTroopCost(troop)}
               </td>
             </tr>
           )}

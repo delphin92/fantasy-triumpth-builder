@@ -10,7 +10,15 @@ export interface ArmyTemplateTroop {
   max?: number;
 }
 
-export const getCost = (troop: ArmyTemplateTroop) =>
+export interface Hero {
+  name: string;
+  description: string;
+  cards: BattleCard[];
+}
+
+const HERO_BASE_COST = 1;
+
+export const getTroopCost = (troop: ArmyTemplateTroop) =>
   Math.max(
     troop.troopType.cost + troop.cards
       .map(card =>
@@ -18,6 +26,14 @@ export const getCost = (troop: ArmyTemplateTroop) =>
           ? card.cost
           : card.cost.special[troop.troopType.name] ?? card.cost.default
       )
+      .reduce((all, cur) => all + cur, 0),
+    1
+  );
+
+export const getHeroCost = (hero: Hero) =>
+  Math.max(
+    HERO_BASE_COST + hero.cards
+      .map(card => card.cost as number)
       .reduce((all, cur) => all + cur, 0),
     1
   );

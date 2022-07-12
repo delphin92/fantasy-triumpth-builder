@@ -2,9 +2,9 @@ import React from "react";
 import {FormControl, Table} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "redux/rootReducer";
-import {getCost} from "model/army";
+import {getTroopCost} from "model/army";
 import {chCb} from "utils/inputUtils";
-import {changeCount} from "redux/armyTemplate";
+import {changeTroopCount} from "redux/armyTemplate";
 
 interface ArmyListTroopsTableProps {
 
@@ -14,7 +14,7 @@ const ArmyListTroopsTable: React.FC<ArmyListTroopsTableProps> = () => {
   const { troops, troopsCounts } = useSelector((state: RootState) => state.armyTemplate);
   const dispatch = useDispatch();
   const change = (i: number) =>
-    chCb(count => dispatch(changeCount({i, count: count ? parseInt(count) : null})))
+    chCb(count => dispatch(changeTroopCount({i, count: count ? parseInt(count) : null})))
 
   return (
     <div>
@@ -34,7 +34,7 @@ const ArmyListTroopsTable: React.FC<ArmyListTroopsTableProps> = () => {
               <td>{troop.name}</td>
               <td>{troop.troopType.name}</td>
               <td>{troop.cards.map(card => card.name).join(', ')}</td>
-              <td>{getCost(troop)}</td>
+              <td>{getTroopCost(troop)}</td>
 
               <td>
                 <FormControl type="number" value={troopsCounts[i] ?? ''} onChange={change(i)}/>
@@ -44,7 +44,7 @@ const ArmyListTroopsTable: React.FC<ArmyListTroopsTableProps> = () => {
         </tbody>
       </Table>
 
-      <h5>Total cost: {troops.map((troop, i) => getCost(troop) * (troopsCounts[i] ?? 0)).reduce((all, cur) => all + cur, 0)}</h5>
+      <h5>Total cost: {troops.map((troop, i) => getTroopCost(troop) * (troopsCounts[i] ?? 0)).reduce((all, cur) => all + cur, 0)}</h5>
     </div>
   );
 };

@@ -1,18 +1,22 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {ArmyTemplateTroop} from "model/army";
+import {ArmyTemplateTroop, Hero} from "model/army";
 import {payloadReducer} from "redux/utils";
 import {troopTypes} from "model/troops";
 
 export interface ArmyTemplateState {
   troops: ArmyTemplateTroop[];
   troopsCounts: (number | null)[];
+  heroes: Hero[];
+  heroesTaken: boolean[];
 }
 
 const armyTemplate = createSlice({
   name: 'armyTemplate',
   initialState: {
     troops: [],
-    troopsCounts: []
+    troopsCounts: [],
+    heroes: [],
+    heroesTaken: [],
   } as ArmyTemplateState,
   reducers: {
     addTroop: state => {
@@ -26,12 +30,28 @@ const armyTemplate = createSlice({
       state.troopsCounts.push(0);
     },
 
-    changeField: payloadReducer((state, {i, field, value}: {i: number, field: keyof ArmyTemplateTroop, value: any}) => {
+    addHero: state => {
+      state.heroes.push({
+        name: '',
+        description: '',
+        cards: [],
+      })
+    },
+
+    changeTroopField: payloadReducer((state, {i, field, value}: {i: number, field: keyof ArmyTemplateTroop, value: any}) => {
       state.troops[i] = {...state.troops[i], [field]: value};
     }),
 
-    changeCount: payloadReducer((state, {i, count}: {i: number, count: number | null}) => {
+    changeTroopCount: payloadReducer((state, {i, count}: {i: number, count: number | null}) => {
       state.troopsCounts[i] = count;
+    }),
+
+    changeHeroField: payloadReducer((state, {i, field, value}: {i: number, field: keyof Hero, value: any}) => {
+      state.heroes[i][field] = value;
+    }),
+
+    toggleHero: payloadReducer((state, i: number) => {
+      state.heroesTaken[i] = !state.heroesTaken[i];
     }),
   }
 });
@@ -40,6 +60,6 @@ const {} = armyTemplate.actions;
 
 /****** EXPORT ******/
 
-export const { changeField, changeCount, addTroop } = armyTemplate.actions;
+export const { changeTroopField, changeTroopCount, changeHeroField, toggleHero, addTroop, addHero } = armyTemplate.actions;
 
 export default armyTemplate.reducer;

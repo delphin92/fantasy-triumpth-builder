@@ -95,4 +95,13 @@ export const battleCards: BattleCard[] = [{
   ]
 }];
 
+export const armyBattleCards = battleCards.filter(card => card.types.includes('Army'));
 export const standBattleCards = battleCards.filter(card => card.types.includes('Stand'));
+export const transferBattleCards = battleCards.filter(card => card.types.includes('Transfer'));
+export const heroBattleCards = battleCards.filter(card => card.types.includes('Hero'));
+export const eventBattleCards = battleCards.filter(card => card.types.includes('Event'));
+
+export const heroAndTransferBattleCards = [
+  ...heroBattleCards,
+  ...transferBattleCards,
+].sort((c1, c2) => c1.name.localeCompare(c2.name))
