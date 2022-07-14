@@ -53,6 +53,10 @@ const armyTemplate = createSlice({
     toggleHero: payloadReducer((state, i: number) => {
       state.heroesTaken[i] = !state.heroesTaken[i];
     }),
+
+    setArmyState: payloadReducer((state, newState: ArmyTemplateState) =>
+      newState
+    ),
   }
 });
 
@@ -60,6 +64,6 @@ const {} = armyTemplate.actions;
 
 /****** EXPORT ******/
 
-export const { changeTroopField, changeTroopCount, changeHeroField, toggleHero, addTroop, addHero } = armyTemplate.actions;
+export const { changeTroopField, changeTroopCount, changeHeroField, toggleHero, addTroop, addHero, setArmyState } = armyTemplate.actions;
 
 export default armyTemplate.reducer;

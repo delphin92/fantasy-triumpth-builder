@@ -10,9 +10,9 @@ interface ContentProps {
 }
 
 const routes = {
-  '/': () => <ArmyTemplate/>,
-  '/list': () => <ArmyList/>,
-  '/game': () => <GameMode/>,
+  '/:hash/template': () => <ArmyTemplate/>,
+  '/:hash/list': () => <ArmyList/>,
+  '/:hash/game': () => <GameMode/>,
 }
 
 const Content: React.FC<ContentProps> = () => (
