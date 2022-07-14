@@ -4,14 +4,14 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "redux/rootReducer";
 import {getTroopCost} from "model/army";
 import {chCb} from "utils/inputUtils";
-import {changeTroopCount} from "redux/armyTemplate";
+import {changeTroopCount} from "redux/armyState";
 
 interface ArmyListTroopsTableProps {
 
 }
 
 const ArmyListTroopsTable: React.FC<ArmyListTroopsTableProps> = () => {
-  const { troops, troopsCounts } = useSelector((state: RootState) => state.armyTemplate);
+  const { troops, troopsCounts } = useSelector((state: RootState) => state.armyState);
   const dispatch = useDispatch();
   const change = (i: number) =>
     chCb(count => dispatch(changeTroopCount({i, count: count ? parseInt(count) : null})))

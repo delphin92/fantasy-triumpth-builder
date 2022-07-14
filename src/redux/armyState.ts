@@ -10,8 +10,8 @@ export interface ArmyTemplateState {
   heroesTaken: boolean[];
 }
 
-const armyTemplate = createSlice({
-  name: 'armyTemplate',
+const armyState = createSlice({
+  name: 'armyState',
   initialState: {
     troops: [],
     troopsCounts: [],
@@ -60,10 +60,10 @@ const armyTemplate = createSlice({
   }
 });
 
-const {} = armyTemplate.actions;
+const {} = armyState.actions;
 
 /****** EXPORT ******/
 
-export const { changeTroopField, changeTroopCount, changeHeroField, toggleHero, addTroop, addHero, setArmyState } = armyTemplate.actions;
+export const { changeTroopField, changeTroopCount, changeHeroField, toggleHero, addTroop, addHero, setArmyState } = armyState.actions;
 
-export default armyTemplate.reducer;
+export default armyState.reducer;

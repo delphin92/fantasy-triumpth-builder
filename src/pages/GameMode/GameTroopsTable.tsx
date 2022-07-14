@@ -8,7 +8,7 @@ interface GameTroopsTableProps {
 }
 
 const GameTroopsTable: React.FC<GameTroopsTableProps> = () => {
-  const { troops, troopsCounts } = useSelector((state: RootState) => state.armyTemplate);
+  const { troops, troopsCounts } = useSelector((state: RootState) => state.armyState);
 
   return (
     <Table>

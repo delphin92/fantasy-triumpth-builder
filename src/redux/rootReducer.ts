@@ -1,8 +1,8 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import armyTemplate from "redux/armyTemplate";
+import armyState from "redux/armyState";
 
 const rootReducer = combineReducers({
-  armyTemplate
+  armyState
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

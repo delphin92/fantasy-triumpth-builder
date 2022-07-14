@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, FormControl, Table} from "react-bootstrap";
-import {addHero, changeHeroField} from "redux/armyTemplate";
+import {addHero, changeHeroField} from "redux/armyState";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "redux/rootReducer";
 import {getHeroCost, Hero} from "model/army";
@@ -13,7 +13,7 @@ interface TemplateHeroesTableProps {
 }
 
 const TemplateHeroesTable: React.FC<TemplateHeroesTableProps> = () => {
-  const { heroes } = useSelector((state: RootState) => state.armyTemplate);
+  const { heroes } = useSelector((state: RootState) => state.armyState);
   const dispatch = useDispatch();
   const change = (i: number, field: keyof Hero) =>
     chCb(value => dispatch(changeHeroField({i, field, value})))

@@ -1,5 +1,5 @@
 import store from "redux/store";
-import {setArmyState} from "redux/armyTemplate";
+import {setArmyState} from "redux/armyState";
 import {debounce} from "lodash";
 
 export interface SerializableState {
@@ -8,7 +8,7 @@ export interface SerializableState {
 
 export const makeHash = debounce(() => {
   // TODO: normalize and compress
-  const hash = window.btoa(JSON.stringify(store.getState().armyTemplate));
+  const hash = window.btoa(JSON.stringify(store.getState().armyState));
 
   const [, , tab] = window.location.pathname.split('/');
   const newUrl = [window.location.origin, hash, tab].join('/');

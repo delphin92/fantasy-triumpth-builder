@@ -1,7 +1,7 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "redux/rootReducer";
-import {toggleHero} from "redux/armyTemplate";
+import {toggleHero} from "redux/armyState";
 import {FormCheck, Table} from "react-bootstrap";
 import {getHeroCost} from "model/army";
 
@@ -10,7 +10,7 @@ interface ArmyListHeroesTableProps {
 }
 
 const ArmyListHeroesTable: React.FC<ArmyListHeroesTableProps> = () => {
-  const { heroes, heroesTaken } = useSelector((state: RootState) => state.armyTemplate);
+  const { heroes, heroesTaken } = useSelector((state: RootState) => state.armyState);
   const dispatch = useDispatch();
 
   return (

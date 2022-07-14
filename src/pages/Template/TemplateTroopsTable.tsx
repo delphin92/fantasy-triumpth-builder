@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "redux/rootReducer";
 import {Button, FormControl, Table} from "react-bootstrap";
 import {chCb} from "utils/inputUtils";
-import {addTroop, changeTroopField} from "redux/armyTemplate";
+import {addTroop, changeTroopField} from "redux/armyState";
 import {ArmyTemplateTroop, getTroopCost} from "model/army";
 import Select from "react-select";
 import {
@@ -33,7 +33,7 @@ const troopTypesOptions = [{
 }]
 
 const TemplateTroopsTable: React.FC<TemplateTroopsTableProps> = () => {
-  const { troops } = useSelector((state: RootState) => state.armyTemplate);
+  const { troops } = useSelector((state: RootState) => state.armyState);
   const dispatch = useDispatch();
   const change = (i: number, field: keyof ArmyTemplateTroop) =>
     chCb(value => dispatch(changeTroopField({i, field, value})))

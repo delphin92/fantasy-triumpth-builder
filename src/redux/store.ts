@@ -7,11 +7,11 @@ import {makeHash} from "model/saveLoad";
 const store = configureStore({
   reducer: rootReducer,
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(
-    () => next => action => {
-
-      if (action.type !== 'stateHash/setHash') {
-        makeHash()
+    () => next => (action: Action<string>) => {
+      if (action.type.startsWith('armyState')) {
+        makeHash();
       }
+
       return next(action);
     }
   )
