@@ -17,6 +17,10 @@ export const makeHash = debounce(() => {
 }, 1000);
 
 export const loadHash = (hash: string) => {
+  if (hash === '_') {
+    return;
+  }
+
   const state = JSON.parse(window.atob(hash));
   store.dispatch(setArmyState(state))
 }
