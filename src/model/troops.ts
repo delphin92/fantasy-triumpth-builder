@@ -1,4 +1,5 @@
 export interface TroopType {
+  id: number;
   name: TroopTypes;
   type: 'foot' | 'mounted';
   order: 'open' | 'close';
@@ -50,13 +51,17 @@ export const troopTypeNames = [
 
 export type TroopTypes = typeof troopTypeNames[number];
 
-const convert = (type: 'foot' | 'mounted', order: 'open' | 'close') => (data: Partial<TroopType>[]) => data.map(toopType => ({
-  ...toopType,
-  type,
-  order,
-} as TroopType));
+const convert = (type: 'foot' | 'mounted', order: 'open' | 'close', offset:number) => (data: Partial<TroopType>[]) =>
+  data.map((toopType, i) => ({
+    ...toopType,
+    id: offset + i,
+    type,
+    order,
+  } as TroopType));
 
-export const openOrderFootTypes: TroopType[] = convert('foot', 'open')([{
+let offset = 0;
+
+export const openOrderFootTypes: TroopType[] = convert('foot', 'open', offset)([{
   name: "Archers",
   vsFoot: 2,
   vsMounted: 4,
@@ -118,7 +123,9 @@ export const openOrderFootTypes: TroopType[] = convert('foot', 'open')([{
   cost: 3
 }]);
 
-export const closeOrderFootTypes: TroopType[] = convert('foot', 'open')([{
+offset += openOrderFootTypes.length;
+
+export const closeOrderFootTypes: TroopType[] = convert('foot', 'open', offset)([{
   name: "Artillery",
   vsFoot: 2,
   vsMounted: 2,
@@ -189,7 +196,9 @@ export const closeOrderFootTypes: TroopType[] = convert('foot', 'open')([{
   cost: 3
 }]);
 
-export const openOrderMountedTypes: TroopType[] = convert('foot', 'open')([{
+offset += closeOrderFootTypes.length;
+
+export const openOrderMountedTypes: TroopType[] = convert('foot', 'open', offset)([{
   name: "Bad Horse",
   vsFoot: 2,
   vsMounted: 2,
@@ -240,7 +249,9 @@ export const openOrderMountedTypes: TroopType[] = convert('foot', 'open')([{
   cost: 4
 }]);
 
-export const closeOrderMountedTypes: TroopType[] = convert('foot', 'open')([{
+offset += openOrderMountedTypes.length;
+
+export const closeOrderMountedTypes: TroopType[] = convert('foot', 'open', offset)([{
   name: "Cataphracts",
   vsFoot: 4,
   vsMounted: 4,

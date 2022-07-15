@@ -3,7 +3,7 @@ import {ArmyTemplateTroop, Hero} from "model/army";
 import {payloadReducer} from "redux/utils";
 import {troopTypes} from "model/troops";
 
-export interface ArmyTemplateState {
+export interface ArmyState {
   troops: ArmyTemplateTroop[];
   troopsCounts: (number | null)[];
   heroes: Hero[];
@@ -17,7 +17,7 @@ const armyState = createSlice({
     troopsCounts: [],
     heroes: [],
     heroesTaken: [],
-  } as ArmyTemplateState,
+  } as ArmyState,
   reducers: {
     addTroop: state => {
       state.troops.push({
@@ -54,7 +54,7 @@ const armyState = createSlice({
       state.heroesTaken[i] = !state.heroesTaken[i];
     }),
 
-    setArmyState: payloadReducer((state, newState: ArmyTemplateState) =>
+    setArmyState: payloadReducer((state, newState: ArmyState) =>
       newState
     ),
   }
