@@ -35,7 +35,9 @@ const armyState = createSlice({
         name: '',
         description: '',
         cards: [],
-      })
+      });
+
+      state.heroesTaken.push(false);
     },
 
     changeTroopField: payloadReducer((state, {i, field, value}: {i: number, field: keyof ArmyTemplateTroop, value: any}) => {
