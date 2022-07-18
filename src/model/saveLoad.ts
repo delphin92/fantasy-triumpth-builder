@@ -1,6 +1,6 @@
 import store from "redux/store";
 import {ArmyState, setArmyState} from "redux/armyState";
-import {debounce} from "lodash";
+import {debounce, isNull} from "lodash";
 import LZUTF8 from "lzutf8";
 import {troopTypes} from "model/troops";
 import {cardsIdMap} from "model/battleCards";
@@ -26,8 +26,17 @@ export type SerializableState = [
     number[], // cards
   ][],
 
-  //heroesTaken:
+  // heroesTaken:
   boolean[],
+
+  // armyCards:
+  [
+    number | null,  // card
+    string,         // description
+  ][],
+
+  // armyCardsCounts:
+  number[],
 ];
 
 export const makeHash = debounce(() => {
@@ -47,6 +56,11 @@ export const makeHash = debounce(() => {
       hero.cards.map(({id}) => id),
     ]),
     state.heroesTaken,
+    state.armyCards.map(card => [
+      card.card?.id ?? null,
+      card.description,
+    ]),
+    state.armyCardsCounts.map(num => num ?? 0),
   ];
 
   const hash = LZUTF8.compress(JSON.stringify(serializableState), {outputEncoding: 'Base64'}).replaceAll('/', '-');
@@ -78,7 +92,12 @@ export const loadHash = (hash: string) => {
       description: hero[1],
       cards: hero[2].map(id => cardsIdMap[id]),
     })),
-    heroesTaken: serializableState[3]
+    heroesTaken: serializableState[3],
+    armyCards: serializableState[4].map(card => ({
+      card: !isNull(card[0]) ? cardsIdMap[card[0]] : null,
+      description: card[1]
+    })),
+    armyCardsCounts: serializableState[5],
   };
 
   store.dispatch(setArmyState(state));

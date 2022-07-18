@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {ArmyTemplateTroop, Hero} from "model/army";
+import {ArmyCard, ArmyTemplateTroop, Hero} from "model/army";
 import {payloadReducer} from "redux/utils";
 import {troopTypes} from "model/troops";
 
@@ -8,6 +8,8 @@ export interface ArmyState {
   troopsCounts: (number | null)[];
   heroes: Hero[];
   heroesTaken: boolean[];
+  armyCards: ArmyCard[];
+  armyCardsCounts: (number | null)[];
 }
 
 const armyState = createSlice({
@@ -17,6 +19,8 @@ const armyState = createSlice({
     troopsCounts: [],
     heroes: [],
     heroesTaken: [],
+    armyCards: [],
+    armyCardsCounts: [],
   } as ArmyState,
   reducers: {
     addTroop: state => {
@@ -40,6 +44,15 @@ const armyState = createSlice({
       state.heroesTaken.push(false);
     },
 
+    addArmyCard: state => {
+      state.armyCards.push({
+        card: null,
+        description: ''
+      });
+
+      state.armyCardsCounts.push(0);
+    },
+
     changeTroopField: payloadReducer((state, {i, field, value}: {i: number, field: keyof ArmyTemplateTroop, value: any}) => {
       state.troops[i] = {...state.troops[i], [field]: value};
     }),
@@ -56,6 +69,14 @@ const armyState = createSlice({
       state.heroesTaken[i] = !state.heroesTaken[i];
     }),
 
+    changeArmyCardField: payloadReducer((state, {i, field, value}: {i: number, field: keyof ArmyCard, value: any}) => {
+      state.armyCards[i] = {...state.armyCards[i], [field]: value};
+    }),
+
+    changeArmyCardCount: payloadReducer((state, {i, count}: {i: number, count: number | null}) => {
+      state.armyCardsCounts[i] = count;
+    }),
+
     setArmyState: payloadReducer((state, newState: ArmyState) =>
       newState
     ),
@@ -66,6 +87,6 @@ const {} = armyState.actions;
 
 /****** EXPORT ******/
 
-export const { changeTroopField, changeTroopCount, changeHeroField, toggleHero, addTroop, addHero, setArmyState } = armyState.actions;
+export const { changeTroopField, changeTroopCount, changeHeroField, toggleHero, changeArmyCardField, changeArmyCardCount, addTroop, addHero, addArmyCard, setArmyState } = armyState.actions;
 
 export default armyState.reducer;

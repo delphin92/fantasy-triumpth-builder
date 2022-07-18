@@ -16,6 +16,11 @@ export interface Hero {
   cards: BattleCard[];
 }
 
+export interface ArmyCard {
+  card: (BattleCard | null);
+  description: string;
+}
+
 const HERO_BASE_COST = 1;
 
 export const getTroopCost = (troop: ArmyTemplateTroop) =>
