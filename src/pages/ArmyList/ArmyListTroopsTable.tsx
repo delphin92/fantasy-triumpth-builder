@@ -2,7 +2,7 @@ import React from "react";
 import {FormControl, Table} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "redux/rootReducer";
-import {getTroopCost} from "model/army";
+import {getTroopCost, getTroopsCost} from "model/army";
 import {chCb} from "utils/inputUtils";
 import {changeTroopCount} from "redux/armyState";
 
@@ -44,7 +44,7 @@ const ArmyListTroopsTable: React.FC<ArmyListTroopsTableProps> = () => {
         </tbody>
       </Table>
 
-      <h5>Total cost: {troops.map((troop, i) => getTroopCost(troop) * (troopsCounts[i] ?? 0)).reduce((all, cur) => all + cur, 0)}</h5>
+      <h5>Troops cost: {getTroopsCost(troops, troopsCounts)}</h5>
     </div>
   );
 };

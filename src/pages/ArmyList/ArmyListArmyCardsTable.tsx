@@ -4,6 +4,7 @@ import {RootState} from "redux/rootReducer";
 import {FormControl, Table} from "react-bootstrap";
 import {chCb} from "utils/inputUtils";
 import {changeArmyCardCount} from "redux/armyState";
+import {getArmyCardsCost} from "model/army";
 
 interface ArmyListArmyCardsTableProps {
 
@@ -39,7 +40,7 @@ const ArmyListArmyCardsTable: React.FC<ArmyListArmyCardsTableProps> = () => {
         </tbody>
       </Table>
 
-      <h5>Total cost: {armyCards.map((card, i) => card.card?.cost as number * (armyCardsCounts[i] ?? 0)).reduce((all, cur) => all + cur, 0)}</h5>
+      <h5>Army cards cost: {getArmyCardsCost(armyCards, armyCardsCounts)}</h5>
     </div>
   );
 };

@@ -45,3 +45,12 @@ export const getHeroCost = (hero: Hero) =>
     hero.duelingValue * 0.5,
     1
   );
+
+export const getTroopsCost = (troops: ArmyTemplateTroop[], troopsCounts: (number | null)[]): number =>
+  troops.map((troop, i) => getTroopCost(troop) * (troopsCounts[i] ?? 0)).reduce((all, cur) => all + cur, 0);
+
+export const getHeroesCost = (heroes: Hero[], heroesTaken: boolean[]): number =>
+  heroes.filter((_, i) => heroesTaken[i]).map(hero => getHeroCost(hero)).reduce((all, cur) => all + cur, 0);
+
+export const getArmyCardsCost = (armyCards: ArmyCard[], armyCardsCounts: (number | null)[]): number =>
+  armyCards.map((card, i) => card.card?.cost as number * (armyCardsCounts[i] ?? 0)).reduce((all, cur) => all + cur, 0)

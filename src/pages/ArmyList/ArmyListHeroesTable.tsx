@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "redux/rootReducer";
 import {toggleHero} from "redux/armyState";
 import {FormCheck, Table} from "react-bootstrap";
-import {getHeroCost} from "model/army";
+import {getHeroCost, getHeroesCost} from "model/army";
 
 interface ArmyListHeroesTableProps {
 
@@ -44,7 +44,7 @@ const ArmyListHeroesTable: React.FC<ArmyListHeroesTableProps> = () => {
         </tbody>
       </Table>
 
-      <h5>Total cost: {heroes.filter((_, i) => heroesTaken[i]).map(hero => getHeroCost(hero)).reduce((all, cur) => all + cur, 0)}</h5>
+      <h5>Heroes cost: {getHeroesCost(heroes, heroesTaken)}</h5>
     </div>
   );
 };

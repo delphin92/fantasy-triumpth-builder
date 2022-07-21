@@ -3,6 +3,7 @@ import ArmyListTroopsTable from "pages/ArmyList/ArmyListTroopsTable";
 import {Card, Col, Row} from "react-bootstrap";
 import ArmyListHeroesTable from "pages/ArmyList/ArmyListHeroesTable";
 import ArmyListArmyCardsTable from "pages/ArmyList/ArmyListArmyCardsTable";
+import TotalCostView from "pages/ArmyList/TotalCostView";
 
 interface ArmyListProps {
 
@@ -34,6 +35,8 @@ const ArmyList: React.FC<ArmyListProps> = () => (
         </Card>
       </Col>
     </Row>
+
+    <TotalCostView/>
   </div>
 );
 
