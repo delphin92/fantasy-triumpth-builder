@@ -17,7 +17,7 @@ const ArmyTemplate: React.FC<ArmyTemplateProps> = () => (
       </Card.Body>
     </Card>
     <Row>
-      <Col sm={6}>
+      <Col sm={8}>
         <Card>
           <Card.Header>Heroes</Card.Header>
           <Card.Body>
@@ -25,7 +25,7 @@ const ArmyTemplate: React.FC<ArmyTemplateProps> = () => (
           </Card.Body>
         </Card>
       </Col>
-      <Col sm={6}>
+      <Col sm={4}>
         <Card>
           <Card.Header>Army Cards</Card.Header>
           <Card.Body>

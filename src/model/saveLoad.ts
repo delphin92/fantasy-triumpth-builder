@@ -24,6 +24,7 @@ export type SerializableState = [
     string,   // name
     string,   // description
     number[], // cards
+    number    // dueling value
   ][],
 
   // heroesTaken:
@@ -54,6 +55,7 @@ export const makeHash = debounce(() => {
       hero.name,
       hero.description,
       hero.cards.map(({id}) => id),
+      hero.duelingValue
     ]),
     state.heroesTaken,
     state.armyCards.map(card => [
@@ -91,6 +93,7 @@ export const loadHash = (hash: string) => {
       name: hero[0],
       description: hero[1],
       cards: hero[2].map(id => cardsIdMap[id]),
+      duelingValue: hero[3]
     })),
     heroesTaken: serializableState[3],
     armyCards: serializableState[4].map(card => ({

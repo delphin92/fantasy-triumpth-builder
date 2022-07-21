@@ -23,7 +23,7 @@ const GameHeroesTable: React.FC<GameHeroesTableProps> = () => {
         {heroes.map((hero, i) =>
           <tr key={i}>
             <td>{hero.name}</td>
-            <td>{0 /*TODO: dueling value*/}</td>
+            <td>{hero.duelingValue}</td>
             <td>
               <ul className="ps-3">
                 {hero.cards.filter(card => !!card.rule).map(card =>

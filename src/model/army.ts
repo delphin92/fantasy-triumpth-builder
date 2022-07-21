@@ -14,6 +14,7 @@ export interface Hero {
   name: string;
   description: string;
   cards: BattleCard[];
+  duelingValue: number;
 }
 
 export interface ArmyCard {
@@ -37,8 +38,10 @@ export const getTroopCost = (troop: ArmyTemplateTroop) =>
 
 export const getHeroCost = (hero: Hero) =>
   Math.max(
-    HERO_BASE_COST + hero.cards
+    HERO_BASE_COST +
+    hero.cards
       .map(card => card.cost as number)
-      .reduce((all, cur) => all + cur, 0),
+      .reduce((all, cur) => all + cur, 0) +
+    hero.duelingValue * 0.5,
     1
   );

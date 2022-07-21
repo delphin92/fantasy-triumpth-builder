@@ -18,10 +18,11 @@ const ArmyListHeroesTable: React.FC<ArmyListHeroesTableProps> = () => {
       <Table>
         <thead>
           <tr>
-            <td>Name</td>
-            <td>Cost</td>
-            <td>Battle Cards</td>
-            <td>Taken</td>
+            <th>Name</th>
+            <th>Cost</th>
+            <th>Battle Cards</th>
+            <th>Dueling value</th>
+            <th>Taken</th>
           </tr>
         </thead>
         <tbody>
@@ -30,6 +31,7 @@ const ArmyListHeroesTable: React.FC<ArmyListHeroesTableProps> = () => {
               <td>{hero.name}</td>
               <td>{getHeroCost(hero)}</td>
               <td>{hero.cards.map(card => card.name).join(', ')}</td>
+              <td>{hero.duelingValue}</td>
               <td>
                 <FormCheck
                   type="switch"

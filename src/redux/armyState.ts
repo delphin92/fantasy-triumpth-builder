@@ -39,6 +39,7 @@ const armyState = createSlice({
         name: '',
         description: '',
         cards: [],
+        duelingValue: 0,
       });
 
       state.heroesTaken.push(false);
@@ -62,7 +63,7 @@ const armyState = createSlice({
     }),
 
     changeHeroField: payloadReducer((state, {i, field, value}: {i: number, field: keyof Hero, value: any}) => {
-      state.heroes[i][field] = value;
+      state.heroes[i] = {...state.heroes[i], [field]: value};
     }),
 
     toggleHero: payloadReducer((state, i: number) => {

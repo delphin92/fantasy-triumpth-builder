@@ -26,6 +26,7 @@ const TemplateHeroesTable: React.FC<TemplateHeroesTableProps> = () => {
             <th>Name</th>
             <th>Description</th>
             <th>Cards</th>
+            <th>Dueling value</th>
             <th>Cost</th>
           </tr>
         </thead>
@@ -54,6 +55,14 @@ const TemplateHeroesTable: React.FC<TemplateHeroesTableProps> = () => {
                 getOptionValue={card => card.name}
                 value={hero.cards}
                 onChange={(value) => dispatch(changeHeroField({i, field: 'cards', value}))}
+              />
+            </td>
+
+            <td>
+              <FormControl
+                type="number"
+                value={hero.duelingValue}
+                onChange={change(i, 'duelingValue')}
               />
             </td>
 
