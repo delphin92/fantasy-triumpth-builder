@@ -103,6 +103,36 @@ export const battleCards: BattleCard[] = [{
   types: [
     "Event"
   ]
+}, {
+  id: 8,
+  name: "Deadly",
+  cost: 2,
+  reference: 35,
+  rule: '',
+  types: [
+    "Stand",
+    "Transfer"
+  ]
+}, {
+  id: 9,
+  name: "Fast",
+  cost: 0.5,
+  reference: 40,
+  rule: '',
+  types: [
+    "Stand",
+    "Transfer"
+  ]
+}, {
+  id: 10,
+  name: "Slow",
+  cost: -0.5,
+  reference: 60,
+  rule: '',
+  types: [
+    "Stand",
+    "Transfer"
+  ]
 }];
 
 export const armyBattleCards = battleCards.filter(card => card.types.includes('Army'));

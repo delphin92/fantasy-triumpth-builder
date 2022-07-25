@@ -1,10 +1,63 @@
-import React from "react";
+import React, {createContext} from "react";
 import {Table} from "react-bootstrap";
 import {useSelector} from "react-redux";
 import {RootState} from "redux/rootReducer";
+import {ArmyTemplateTroop, getTroopCloseCombat, getTroopMove} from "model/army";
+import TroopAttributeValue from "pages/GameMode/TroopAttributeValue";
 
 interface GameTroopsTableProps {
 
+}
+
+export const TroopContext = createContext<ArmyTemplateTroop>(undefined as unknown as ArmyTemplateTroop);
+
+const GameTroopsTableRow: React.FC<{troop: ArmyTemplateTroop}> = ({troop}) => {
+  const move = getTroopMove(troop);
+  const [vsFoot, vsMounted] = getTroopCloseCombat(troop)
+
+
+  return(
+    <TroopContext.Provider value={troop}>
+      <tr>
+        <td>{troop.name}</td>
+        <td>{troop.troopType.name}</td>
+        <td><TroopAttributeValue value={move} attribute="move"/>&nbsp;MU</td>
+        <td>+<TroopAttributeValue value={vsFoot} attribute="vsFoot"/></td>
+        <td>+<TroopAttributeValue value={vsMounted} attribute="vsMounted"/></td>
+        <td>
+          {troop.troopType.shoot ?
+            <>+{troop.troopType.shoot} ({troop.troopType.shootDistance}&nbsp;MU)</>
+            : ''
+          }
+        </td>
+        <td>+{troop.troopType.target}</td>
+        <td>{troop.troopType.shatter}</td>
+        <td>
+          {troop.cards.some(card => card.name === 'Brittle')
+            ? 'Any'
+            : troop.troopType.shattered instanceof Array
+              ? (
+                <ul className="ps-3">
+                  {troop.troopType.shattered.map(str =>
+                    <li key={str}>{str}</li>
+                  )}
+                </ul>
+              )
+              : troop.troopType.shattered
+          }
+        </td>
+        <td>{troop.troopType.evade}</td>
+        <td>{troop.troopType.panic}</td>
+        <td>
+          <ul className="ps-3">
+            {troop.cards.filter(card => !!card.rule).map(card =>
+              <li key={card.name}>{card.rule}</li>
+            )}
+          </ul>
+        </td>
+      </tr>
+    </TroopContext.Provider>
+  );
 }
 
 const GameTroopsTable: React.FC<GameTroopsTableProps> = () => {
@@ -30,44 +83,7 @@ const GameTroopsTable: React.FC<GameTroopsTableProps> = () => {
       </thead>
       <tbody>
         {troops.filter((_, i) => !!troopsCounts[i]).map((troop, i) =>
-          <tr key={i}>
-            <td>{troop.name}</td>
-            <td>{troop.troopType.name}</td>
-            <td>{troop.troopType.move}&nbsp;MU</td>
-            <td>+{troop.troopType.vsFoot}</td>
-            <td>+{troop.troopType.vsMounted}</td>
-            <td>
-              {troop.troopType.shoot ?
-                <>+{troop.troopType.shoot} ({troop.troopType.shootDistance}&nbsp;MU)</>
-                : ''
-              }
-            </td>
-            <td>+{troop.troopType.target}</td>
-            <td>{troop.troopType.shatter}</td>
-            <td>
-              {troop.cards.some(card => card.name === 'Brittle')
-                ? 'Any'
-                : troop.troopType.shattered instanceof Array
-                  ? (
-                    <ul className="ps-3">
-                      {troop.troopType.shattered.map(str =>
-                        <li key={str}>{str}</li>
-                      )}
-                    </ul>
-                  )
-                  : troop.troopType.shattered
-              }
-            </td>
-            <td>{troop.troopType.evade}</td>
-            <td>{troop.troopType.panic}</td>
-            <td>
-              <ul className="ps-3">
-                {troop.cards.filter(card => !!card.rule).map(card =>
-                  <li key={card.name}>{card.rule}</li>
-                )}
-              </ul>
-            </td>
-          </tr>
+          <GameTroopsTableRow key={i} troop={troop}/>
         )}
       </tbody>
     </Table>
