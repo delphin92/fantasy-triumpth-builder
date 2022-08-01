@@ -4,6 +4,7 @@ import {useSelector} from "react-redux";
 import {RootState} from "redux/rootReducer";
 import {ArmyTemplateTroop, getTroopCloseCombat, getTroopMove} from "model/army";
 import TroopAttributeValue from "pages/GameMode/TroopAttributeValue";
+import InfoList from "components/InfoList";
 
 interface GameTroopsTableProps {
 
@@ -31,23 +32,21 @@ const GameTroopsTableRow: React.FC<{troop: ArmyTemplateTroop}> = ({troop}) => {
           }
         </td>
         <td>+{troop.troopType.target}</td>
-        <td>{troop.troopType.shatter}</td>
+        <td><InfoList data={troop.troopType.shatter}/></td>
         <td>
           {troop.cards.some(card => card.name === 'Brittle')
             ? 'Any'
-            : troop.troopType.shattered instanceof Array
-              ? (
-                <ul className="ps-3">
-                  {troop.troopType.shattered.map(str =>
-                    <li key={str}>{str}</li>
-                  )}
-                </ul>
-              )
-              : troop.troopType.shattered
+            : (
+              <ul className="ps-3">
+                {troop.troopType.shattered?.map(str =>
+                  <li key={str}>{str}</li>
+                )}
+              </ul>
+            )
           }
         </td>
-        <td>{troop.troopType.evade}</td>
-        <td>{troop.troopType.panic}</td>
+        <td><InfoList data={troop.troopType.evade}/></td>
+        <td><InfoList data={troop.troopType.panic}/></td>
         <td>
           <ul className="ps-3">
             {troop.cards.filter(card => !!card.rule).map(card =>
