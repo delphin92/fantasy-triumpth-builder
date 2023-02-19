@@ -42,6 +42,7 @@ const TemplateHeroesTable: React.FC<TemplateHeroesTableProps> = () => {
 
             <td>
               <FormControl
+                as="textarea"
                 value={hero.description}
                 onChange={change(i, 'description')}
               />

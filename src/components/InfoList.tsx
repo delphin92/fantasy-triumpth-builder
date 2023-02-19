@@ -1,13 +1,13 @@
-import React from "react";
+import React, {ReactNode} from "react";
 
 interface InfoListProps {
-  data?: string[]
+  data?: ReactNode[];
 }
 
 const InfoList: React.FC<InfoListProps> = ({data}) => (
   <ul className="ps-3">
     {data?.map(str =>
-      <li key={str}>{str}</li>
+      <li key={str?.toString()}>{str}</li>
     )}
   </ul>
 );

@@ -42,6 +42,7 @@ const TemplateArmyCardsTable: React.FC<TemplateArmyCardsTableProps> = () => {
               </td>
               <td>
                 <FormControl
+                  as="textarea"
                   value={card.description}
                   onChange={change(i, 'description')}
                 />

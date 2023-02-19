@@ -28,7 +28,7 @@ export const battleCards: BattleCard[] = [{
   name: "Ambush: home only",
   cost: 1,
   reference: 24,
-  rule: '',
+  rule: 'Armies with this battle card may deploy troops outside the standard deployment area.',
   types: [
     "Army"
   ]

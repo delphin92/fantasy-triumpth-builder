@@ -59,7 +59,7 @@ const TemplateTroopsTable: React.FC<TemplateTroopsTableProps> = () => {
                 <FormControl value={troop.name} onChange={change(i, 'name')}/>
               </td>
               <td>
-                <FormControl value={troop.description} onChange={change(i, 'description')}/>
+                <FormControl as="textarea" value={troop.description} onChange={change(i, 'description')}/>
               </td>
               <td>
                 <Select

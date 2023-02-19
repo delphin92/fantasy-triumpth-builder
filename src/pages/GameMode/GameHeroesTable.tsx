@@ -8,7 +8,7 @@ interface GameHeroesTableProps {
 }
 
 const GameHeroesTable: React.FC<GameHeroesTableProps> = () => {
-  const { heroes } = useSelector((state: RootState) => state.armyState);
+  const { heroes, heroesTaken } = useSelector((state: RootState) => state.armyState);
 
   return (
     <Table>
@@ -20,7 +20,7 @@ const GameHeroesTable: React.FC<GameHeroesTableProps> = () => {
       </tr>
       </thead>
       <tbody>
-        {heroes.map((hero, i) =>
+        {heroes.filter((_, i) => heroesTaken[i]).map((hero, i) =>
           <tr key={i}>
             <td>{hero.name}</td>
             <td>{hero.duelingValue}</td>

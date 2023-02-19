@@ -48,11 +48,10 @@ const GameTroopsTableRow: React.FC<{troop: ArmyTemplateTroop}> = ({troop}) => {
         <td><InfoList data={troop.troopType.evade}/></td>
         <td><InfoList data={troop.troopType.panic}/></td>
         <td>
-          <ul className="ps-3">
-            {troop.cards.filter(card => !!card.rule).map(card =>
-              <li key={card.name}>{card.rule}</li>
-            )}
-          </ul>
+          <InfoList data={[
+            ...troop.troopType.additional ?? [],
+            ...troop.cards.filter(card => !!card.rule).map(card => card.rule)
+          ]}/>
         </td>
       </tr>
     </TroopContext.Provider>
