@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/fantasy-triumpth-builder/static/css/main.bcc3b361.css",
-    "main.js": "/fantasy-triumpth-builder/static/js/main.8ed1866b.js",
+    "main.js": "/fantasy-triumpth-builder/static/js/main.faa6812e.js",
     "static/js/787.4e76c3f4.chunk.js": "/fantasy-triumpth-builder/static/js/787.4e76c3f4.chunk.js",
     "index.html": "/fantasy-triumpth-builder/index.html",
     "main.bcc3b361.css.map": "/fantasy-triumpth-builder/static/css/main.bcc3b361.css.map",
-    "main.8ed1866b.js.map": "/fantasy-triumpth-builder/static/js/main.8ed1866b.js.map",
+    "main.faa6812e.js.map": "/fantasy-triumpth-builder/static/js/main.faa6812e.js.map",
     "787.4e76c3f4.chunk.js.map": "/fantasy-triumpth-builder/static/js/787.4e76c3f4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.bcc3b361.css",
-    "static/js/main.8ed1866b.js"
+    "static/js/main.faa6812e.js"
   ]
 }
